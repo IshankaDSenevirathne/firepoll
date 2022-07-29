@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import {trpc} from "../utils/trpc";
 import { useRef } from 'react';
+import Link from "next/link";
 
 const QuestionCreator:React.FC=()=>{
 
@@ -46,7 +47,7 @@ const Home: NextPage = () => {
         <h1 className="text-2xl font-bold">Questions</h1>
         {data.map((question,idx)=>
           <div key={idx}>
-            <p>{question.question}</p>
+            <Link href={`/question/${question.id}`}>{question.question}</Link>
           </div>
         )}
         <QuestionCreator/>
