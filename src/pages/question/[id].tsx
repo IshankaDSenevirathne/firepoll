@@ -9,7 +9,18 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
         return <div>Question  not found!</div>
     }
 
-    return <div>{data?.question}</div>
+    return (
+        <div>
+            {data?.question}
+            <div>
+                {data?.options.map((option,idx)=>
+                    <div key={idx}>
+                        <p>{option}</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
 }
 
 const QuestionPage:NextPage =()=>{
