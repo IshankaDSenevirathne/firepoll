@@ -12,19 +12,9 @@ datasource db {
   referentialIntegrity ="prisma"
 }
 
-model Product{
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  price Decimal
-  image String
-  category Category? @relation(fields: [category_id],references:[id])
-  category_id Int
-  @@index([category_id])
+model PollQuestion{
+  id String @id @default(cuid())
+  createdAt DateTime @default(now())
+  endsAt DateTime?
+  question String
 }
- model Category {
-  id Int @id @default(autoincrement())
-  name String
-  description String
-  products Product[]
- }
