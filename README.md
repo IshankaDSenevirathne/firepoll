@@ -1,7 +1,6 @@
-#Stairs app
+# Stairs
 
-### TODO
-
--[] Add auth for question creator
--[] Improve UI
--[] Add behaviors for "ending" poll (endtime,manual end,etc)
+### To do
+-[ ] Add auth for question creator
+-[ ] Improve UI
+-[ ] Add behaviors for "ending" poll (endtime,manual end,etc)
