@@ -10,15 +10,29 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
 export default withTRPC<AppRouter>({
   config({ ctx }) {
+    if (typeof window !== 'undefined') {
+      // during client requests
+      return {
+        transformer: superjson, // optional - adds superjson serialization
+        url: '/api/trpc',
+      };
+    }
     /**
      * If you want to use SSR, you need to use the server's full URL
      * @link https://trpc.io/docs/ssr
      */
-    const url ='/api/trpc';
+     const url = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}/api/trpc`
+      : 'http://localhost:3000/api/trpc';
+
 
     return {
       url,
-      transformer:superjson
+      transformer:superjson,
+      headers: {
+        // optional - inform server that it's an ssr request
+        'x-ssr': '1',
+      },
       /**
        * @link https://react-query-v3.tanstack.com/reference/QueryClient
        */
@@ -28,5 +42,5 @@ export default withTRPC<AppRouter>({
   /**
    * @link https://trpc.io/docs/ssr
    */
-  ssr: false,
+  ssr: true,
 })(MyApp);
