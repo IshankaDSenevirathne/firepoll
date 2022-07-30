@@ -10,12 +10,12 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
     if(!isLoading && !data){
         return <div>Question  not found!</div>
     }
-    
     return (
         <div>
-            {data?.question}
+            {data?.isOwner && <div>You made this!</div>}
+            <div>{data?.question?.question}</div>
             <div>
-                {data?.options.map((option,idx)=>
+                {(data?.question?.options as string[]).map((option,idx)=>
                     <div key={idx}>
                         <p>{option}</p>
                     </div>
@@ -33,6 +33,5 @@ const QuestionPage:NextPage =()=>{
     if(!id || typeof id !== "string") return <div>No ID</div>
 
     return <QuestionsPageContent id={id}/>
-    
 }
 export default QuestionPage;
