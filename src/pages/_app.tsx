@@ -31,6 +31,7 @@ export default withTRPC<AppRouter>({
       transformer:superjson,
       headers: {
         // optional - inform server that it's an ssr request
+        cookie:ctx?.req?.headers.cookie,
         'x-ssr': '1',
       },
       /**
