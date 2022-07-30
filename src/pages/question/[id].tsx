@@ -5,10 +5,12 @@ import {trpc} from "../../utils/trpc";
 const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
     const {data,isLoading,error} = trpc.useQuery(["questions.get-by-id",{id}])
     
+    if(isLoading) return <div>Loading ...</div>
+
     if(!isLoading && !data){
         return <div>Question  not found!</div>
     }
-
+    
     return (
         <div>
             {data?.question}
