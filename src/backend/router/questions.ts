@@ -1,6 +1,6 @@
-import { createTextChangeRange } from 'typescript';
 import { z } from 'zod';
 import {prisma} from "../../db/client";
+import { createQuestionValidator } from '../../shared/create-question-validator';
 import {createRouter} from "./context"
 
 export const questionRouter = createRouter()
@@ -30,11 +30,9 @@ export const questionRouter = createRouter()
     }
   })
   .mutation("create",{
-    input:z.object({
-      question:z.string().min(5).max(600),
-    }),
+    input:createQuestionValidator,
     async resolve({input,ctx}){
-      if(!ctx.token) return {error:'Unauthorized'}
+      if(!ctx.token) throw new Error("Unauthorized")
       return await prisma.pollQuestion.create({
         data:{
           question:input.question,
