@@ -14,6 +14,7 @@ export default withTRPC<AppRouter>({
       // during client requests
       return {
         transformer: superjson, // optional - adds superjson serialization
+        headers:{cookie:ctx?.req?.headers.cookie},
         url: '/api/trpc',
       };
     }
