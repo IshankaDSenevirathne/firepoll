@@ -7,7 +7,6 @@ import { nanoid } from 'nanoid';
 export function middleware(request: NextRequest) {
     
     if(request.cookies.get('poll-token')){
-        console.log("Cookie : ",request.cookies.get('poll-token'))
         return;
     } 
     const token = nanoid();

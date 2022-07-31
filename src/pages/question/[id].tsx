@@ -14,7 +14,6 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
     if(!data || !data?.question){
         return <div>Question  not found!</div>
     }
-    console.log(data)
     return (
         <div className="flex flex-col items-center justify-center my-10">
             <div className="mb-4 text-center">
