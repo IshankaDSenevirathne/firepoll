@@ -34,7 +34,17 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
                             if(data?.isOwner || data.vote){
                                 return(
                                     <div className="flex flex-col gap-2" key={idx}>
-                                        <p className="border border-zinc-600 bg-zinc-700 p-2 rounded-md text-lg font-bold">{data?.votes?.[idx]?._count} - {(option as any).text}</p>
+                                        <p className=
+                                                {  
+                                                    data.vote?.choice==idx?
+                                                        "border border-pink-300 bg-pink-400 p-2 rounded-md text-lg font-bold"
+                                                            :
+                                                        "border border-zinc-600 bg-zinc-700 p-2 rounded-md text-lg font-bold"
+                                                            
+                                                }
+                                        >
+                                            {data?.votes?.[idx]?._count} - {(option as any).text}
+                                        </p>
                                     </div>
                                 )
                             }
