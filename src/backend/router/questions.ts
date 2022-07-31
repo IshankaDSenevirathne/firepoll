@@ -26,7 +26,13 @@ export const questionRouter = createRouter()
           id:input.id
         }
       })
-      return {question,isOwner:question?.ownerToken === ctx.token}
+      const myVote =  await prisma.vote.findFirst({
+        where:{
+          questionId:input.id,
+          voterToken:ctx.token
+        }
+      })
+      return {question,vote:myVote,isOwner:question?.ownerToken===ctx.token}
     }
   })
   .mutation("create",{
@@ -38,6 +44,22 @@ export const questionRouter = createRouter()
           question:input.question,
           options:input.options,
           ownerToken:ctx.token
+        }
+      })
+    }
+  })
+  .mutation("vote-on-question",{
+    input:z.object({
+      questionId:z.string(),
+      option:z.number().min(0).max(10)
+    }),
+    async resolve({input,ctx}){
+      if(!ctx.token) throw new Error("Unauthorized")
+      return await prisma.vote.create({
+        data:{
+          questionId:input.questionId,
+          choice:input.option,
+          voterToken:ctx.token
         }
       })
     }

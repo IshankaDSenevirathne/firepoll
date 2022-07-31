@@ -58,7 +58,7 @@ const CreateQuestionForm:React.FC=()=>{
                             />
                         <span className="w-fit flex justify-end">
                             <button 
-                                className="rounded-md py-2 bg-zinc-700 font-bold px-4 border border-zinc-600 text-sm text-gray-400 hover:text-pink-300 hover:border-pink-300 duration-200 delay-10"
+                                className="rounded-md py-2 bg-zinc-700 px-4 border border-zinc-600 text-sm text-gray-400 hover:text-pink-300 hover:border-pink-300 duration-200 delay-10"
                                 type="button"
                                 onClick={()=>remove(index)}>
                                 X
@@ -66,6 +66,7 @@ const CreateQuestionForm:React.FC=()=>{
                         </span>
                     </section>
                 ))}
+                {errors.options?.message && <p className="text-red-400 text-thin text-sm">{errors.options.message}</p>}
             </span>
             <span className="block mb-2">
                 <button 
