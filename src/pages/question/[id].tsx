@@ -43,7 +43,7 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
                                                             
                                                 }
                                         >
-                                            {data?.votes?.[idx]?._count} - {(option as any).text}
+                                            {data?.votes?.[idx]?._count ?? 0} - {(option as any).text}
                                         </p>
                                     </div>
                                 )
