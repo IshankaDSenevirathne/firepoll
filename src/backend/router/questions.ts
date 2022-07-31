@@ -32,7 +32,26 @@ export const questionRouter = createRouter()
           voterToken:ctx.token
         }
       })
-      return {question,vote:myVote,isOwner:question?.ownerToken===ctx.token}
+      const rest = {
+        question,
+        vote:myVote,
+        isOwner:question?.ownerToken === ctx.token
+      }
+
+      if(rest.vote || rest.isOwner){
+        const votes = await prisma.vote.groupBy(
+          {
+            by:['choice'],
+            _count:true
+          }
+        );
+        return {
+          ...rest,
+          votes
+        }
+      }
+
+      return {...rest,votes:undefined}
     }
   })
   .mutation("create",{

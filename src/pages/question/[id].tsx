@@ -14,6 +14,7 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
     if(!data || !data?.question){
         return <div>Question  not found!</div>
     }
+    console.log(data)
     return (
         <div className="flex flex-col items-center justify-center my-10">
             <div className="mb-4 text-center">
@@ -33,13 +34,16 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
                             if(data?.isOwner || data.vote){
                                 return(
                                     <div className="flex flex-col gap-2" key={idx}>
-                                        <p className="border border-zinc-600 bg-zinc-700 p-2 rounded-md text-lg font-bold">{(option as any).text}</p>
+                                        <p className="border border-zinc-600 bg-zinc-700 p-2 rounded-md text-lg font-bold">{data?.votes?.[idx]?._count} - {(option as any).text}</p>
                                     </div>
                                 )
                             }
                             return (
                                 <div key={idx} className="flex flex-col gap-2">
-                                    <button className="border border-zinc-600 p-2 bg-zinc-700 rounded-md text-lg font-bold hover:border-pink-300 hover:text-pink-300 duration-300 delay-10" onClick={()=>mutate({questionId:data?.question!.id,option:idx})}>{(option as any).text}</button>
+                                    <button className="border border-zinc-600 p-2 bg-zinc-700 rounded-md text-lg font-bold hover:border-pink-300 hover:text-pink-300 duration-300 delay-10" 
+                                            onClick={()=>mutate({questionId:data?.question!.id,option:idx})}>
+                                                {(option as any).text}
+                                    </button>
                                 </div>
                             )
                         }
