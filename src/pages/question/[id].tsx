@@ -17,7 +17,7 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
             <div>
                 {(data?.question?.options as string[]).map((option,idx)=>
                     <div key={idx}>
-                        <p>{option}</p>
+                        <p>{(option as any).text}</p>
                     </div>
                 )}
             </div>
