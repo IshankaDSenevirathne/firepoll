@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import Logo from "../public/logo.png";
 
-const Hero=()=>{
+const Landing=()=>{
     return(
         <div className="w-full h-screen flex flex-col items-center justify-center">
             <div className="flex flex-col items-center justify-center mb-10">
-                <Image src={Logo} width={800} height={400} objectFit="contain" />
+                <Image src="/firepoll.svg" width={800} height={400} objectFit="contain" />
             </div>
             <div className="flex gap-2 justify-between items-center mb-4">
                 <Link href="/create">
@@ -24,4 +23,4 @@ const Hero=()=>{
     )
 }
 
-export default Hero;
+export default Landing;
