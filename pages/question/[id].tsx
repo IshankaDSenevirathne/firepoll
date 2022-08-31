@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import {trpc} from "../../utils/trpc";
-
+import Spinner from "../../components/Spinner";
 const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
     const {data,isLoading,error} = trpc.useQuery(["questions.get-by-id",{id}])
     
@@ -9,16 +9,15 @@ const QuestionsPageContent:React.FC<{id:string}>=({id})=>{
         onSuccess:()=>window.location.reload()
     });
     if(isLoading){
-        return <div>Loading...</div>
+        return <div className="w-full min-h-screen flex flex-col items-center justify-center"><Spinner /></div>
     }
     if(!data || !data?.question){
-        return <div>Question  not found!</div>
+        return <div className="w-full min-h-screen flex flex-col items-center justify-center text-4xl">Question  not found!</div>
     }
     return (
         <div className="w-full h-screen flex flex-col items-center justify-center">
             <div className="mb-4 text-center">
                 <h1 className="text-4xl font-bold">Vote for Poll</h1>
-                <p className='text-gray-400 text-sm mt-2'>Ends in 00:00:23</p>
             </div>
             <div className="p-4 border-t-4 container max-w-screen-md border-rose-300 bg-zinc-800 rounded-md shadow-md">
                 <div className="flex w-full justify-end">
