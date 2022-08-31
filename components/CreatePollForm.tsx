@@ -4,7 +4,7 @@ import {trpc} from "../utils/trpc";
 import {XIcon} from "@heroicons/react/solid";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { CreateQuestionInputType, createQuestionValidator } from '../shared/create-question-validator';
-
+import Spinner from "./Spinner";
 
 const CreatePollForm=()=>{
 
@@ -34,9 +34,14 @@ const CreatePollForm=()=>{
         }
     })
 
-    if(isLoading || data) return <div>Loading ... </div>
+    if(isLoading || data) return <div className="w-full h-full flex flex-col items-center justify-center"><Spinner /></div>
 
     return (
+    <>
+        <div className="mb-4 text-center">
+            <h1 className="text-4xl font-bold">Create a Poll</h1>
+            <p className='text-gray-400 text-sm mt-2'>Complete the below fields to create your poll.</p>
+        </div>
       <form onSubmit={handleSubmit((data)=>{
         mutate(data)
       })}>
@@ -91,6 +96,7 @@ const CreatePollForm=()=>{
             </div>
         </div>
       </form>
+      </>
     );
 }
 

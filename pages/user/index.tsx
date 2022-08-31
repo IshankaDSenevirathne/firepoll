@@ -1,12 +1,13 @@
 import {NextPage} from "next";
 import {trpc} from "../../utils/trpc";
 import Link from "next/link";
+import Spinner from "../../components/Spinner";
 
 const User:NextPage=()=>{
 
     const {data,isLoading} = trpc.useQuery(["questions.get-all-my-questions"])
 
-    if(isLoading || !data) return <div>Loading..</div>
+    if(isLoading || !data) return <div className="w-full min-h-screen flex flex-col items-center justify-center"><Spinner /></div>
 
     return (
         <div>
